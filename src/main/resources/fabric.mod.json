@@ -1,0 +1,19 @@
+{
+  "schemaVersion": 1,
+  "id": "thornsrework",
+  "version": "${version}",
+  "name": "Thorns Rework",
+  "description": "Reworks Thorns retaliation and adds projectile protection.",
+  "environment": "*",
+  "entrypoints": {
+    "main": ["dev.thornsrework.ThornsRework"],
+    "client": ["dev.thornsrework.client.ThornsReworkClient"]
+  },
+  "mixins": ["thornsrework.mixins.json"],
+  "depends": {
+    "fabricloader": ">=0.18.4",
+    "fabric-api": "*",
+    "minecraft": "1.21.1",
+    "java": ">=21"
+  }
+}

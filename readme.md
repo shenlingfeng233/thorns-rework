@@ -4,7 +4,7 @@
 
 ## 构建
 
-在本目录运行 Windows 命令 `gradlew.bat build`，或在 Linux/macOS 上运行 `./gradlew build`。发布 JAR 位于 `build/libs/thorns-rework-0.0.1-release.jar`。构建版本锁定在 `gradle.properties`，本次使用 Fabric Loader 0.20.1、Fabric API 0.116.18+1.21.1、Yarn 1.21.1+build.3、Loom 1.11.8 和 Gradle 8.14。
+在本目录运行 Windows 命令 `gradlew.bat build`，或在 Linux/macOS 上运行 `./gradlew build`。发布 JAR 位于 `build/libs/thorns-rework-0.1.0-beta.jar`。构建版本锁定在 `gradle.properties`，本次使用 Fabric Loader 0.20.1、Fabric API 0.116.18+1.21.1、Yarn 1.21.1+build.3、Loom 1.11.8 和 Gradle 8.14。
 
 ## 游戏行为
 
@@ -29,6 +29,25 @@
 ### 弹射物减免
 
 弹射物伤害添加一次 8.333333 EPF，约等于 33.33% 减免，排除 `bypasses_invulnerability`。多件荆棘装备合计贡献一份减免，其他保护附魔和原版 80% 总上限继续生效。
+
+## 困难难度精英僵尸和骷髅
+
+仅原版生存难度为 Hard 时，原版自然生成的僵尸和骷髅各自进行一次独立出现概率判定，不影响指令、刷怪笼、增援及其它生成来源：
+
+- **超越者（Beyond）**：默认独立出现概率 **5%**；穿戴 2–3 件不同部位的皮革、金质或锁链甲，每件装备随机拥有 I 或 II 级荆棘。
+- **霸主（Overlord）**：默认独立出现概率 **0.2%**；穿戴 2–4 件不同部位的铁甲，每件均拥有 III 级荆棘。
+
+精英出现时会替换这些盔甲部位原有的装备；程序化设置的盔甲死亡时不会掉落。若两次独立概率判定同时成功，同一生物按霸主档生成。
+
+精英盔甲默认不会作为掉落物掉落。管理员（权限等级 2）开启 Debug Mode 后可用以下命令分别读取和修改概率；改动立即生效，并保存到 `config/thornsrework.json`：
+
+```text
+/thornsrework debug ThornMonsterSpawnRate
+/thornsrework debug ThornMonsterSpawnRate Beyond change 5
+/thornsrework debug ThornMonsterSpawnRate Overlord change 0.2
+```
+
+Beyond 和 Overlord 概率各自独立掷骰；各次生成由同一世界随机数生成器依次判定。两次同时命中时以装备更强的霸主为准。参数范围为 `0`–`100`。未开启调试模式时，命令显示 `需要使用/thornsrework debug set true开启调试模式 en-us:Use /thornsrework debug set true to enable debug mode.`。数值保存至 `config/thornsrework.json`，重启后继续生效。要用 JVM 参数强制开启 Debug Mode，可在专服的 `-jar` 前添加 `-Dthornsrework.debug=true`。
 
 ## 调试与冲突
 

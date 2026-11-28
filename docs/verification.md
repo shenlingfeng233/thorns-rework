@@ -11,6 +11,9 @@
 | FR-14 | 专服已验证配置默认值、JVM 强制开关、`debug status`、`debug reload` 与各反制分支的日志。概率观测复用原版判定结果。 |
 | NFR-8 | 1.21.1 无模组协议客户端已收取并检查荆棘同步数据，专服记录客户端成功进入。原版图形客户端、装模组的图形客户端和局域网联机属于待做的图形端联调。 |
 
+| 精英僵尸和骷髅 | 僵尸（`ZombieEntity.initialize`）与骷髅（`AbstractSkeletonEntity.initialize`）尾部各有独立 Mixin；`ThornMonsterSpawner` 仅接受 `SpawnReason.NATURAL` 且世界难度严格等于 Hard。两种默认几率独立掷骰，若两次同中则霸主优先。超越者为 2–3 件皮革/金/锁链甲，逐件荆棘 I/II；霸主为 2–4 件铁甲，逐件荆棘 III；手动设置装备掉落率为 0%。发布 JAR 已通过离线构建和专服启动；自然刷怪物品生成与概率抽样仍待游戏内验收。 |
+| 精英出现概率命令 | 专服已验证 `/thornsrework debug ThornMonsterSpawnRate`、禁用调试后拦截、重新启用、100% 上界、概率修改和配置保存。参数 `0..100` 由 Brigadier 限制。关闭 Debug Mode 后显示需求指定的中英提示。 |
+
 ## 游戏内复验
 
 - 使用荆棘 I、II、III 分别累积攻击样本，检查 `CHANCE_MISS` 和命中日志。多件装备应各自判定，概率约为 15%、30%、45%。观察守卫者音波、河豚和盔甲架，与相同环境的原版表现比对。

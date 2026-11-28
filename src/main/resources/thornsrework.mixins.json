@@ -2,7 +2,6 @@
   "required": true,
   "package": "dev.thornsrework.mixin",
   "compatibilityLevel": "JAVA_21",
-  "mixins": ["EnchantmentDebugMixin", "EnchantmentSyncMixin", "ProjectileProtectionMixin"],
+  "mixins": ["NaturalThornZombieSpawnMixin", "NaturalThornMonsterSpawnMixin", "EnchantmentDebugMixin", "EnchantmentSyncMixin", "ProjectileProtectionMixin"],
   "injectors": {"defaultRequire": 1}
 }
-

@@ -23,6 +23,7 @@ public final class ThornsRework implements ModInitializer {
     @Override
     public void onInitialize() {
         Registry.register(Registries.ENCHANTMENT_ENTITY_EFFECT_TYPE, RETALIATE, RetaliationEffect.CODEC);
+
         var container = FabricLoader.getInstance().getModContainer(ID).orElseThrow();
         if (!ResourceManagerHelper.registerBuiltinResourcePack(PACK, container,
                 Text.literal("Thorns Rework"), ResourcePackActivationType.ALWAYS_ENABLED)) {

@@ -55,7 +55,7 @@ public final class DebugMode {
 
     private static int status(ServerCommandSource source) {
         source.sendFeedback(() -> Text.literal("Thorns Rework debug=" + enabled() + " (configured=" + configured
-                + ", dedicatedOverride=" + forced + "), durabilityCost=" + RetaliationEffect.DURABILITY_COST
+                + ", dedicatedOverride=" + forced + "), durabilityCostPerLevel=" + RetaliationEffect.DURABILITY_COST_PER_LEVEL
                 + ", bareHandDamage=" + RetaliationEffect.MIN_DAMAGE + ".." + RetaliationEffect.MAX_DAMAGE
                 + ", projectileEPF=8.333333, config=" + FILE), false);
         return 1;

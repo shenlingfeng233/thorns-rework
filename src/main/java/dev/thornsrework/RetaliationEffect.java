@@ -22,7 +22,7 @@ public enum RetaliationEffect implements EnchantmentEntityEffect {
     INSTANCE;
 
     public static final MapCodec<RetaliationEffect> CODEC = MapCodec.unit(INSTANCE);
-    public static final int DURABILITY_COST = 3;
+    public static final int DURABILITY_COST_PER_LEVEL = 3;
     public static final float MIN_DAMAGE = 1.0F;
     public static final float MAX_DAMAGE = 5.0F;
 
@@ -75,7 +75,8 @@ public enum RetaliationEffect implements EnchantmentEntityEffect {
         Item item = stack.getItem();
         int before = stack.getDamage();
         int maximum = stack.getMaxDamage();
-        int after = before + Math.min(Math.max(0, maximum - before), DURABILITY_COST);
+        int cost = DURABILITY_COST_PER_LEVEL * level;
+        int after = before + Math.min(Math.max(0, maximum - before), cost);
         if (attacker instanceof ServerPlayerEntity player) {
             Criteria.ITEM_DURABILITY_CHANGED.trigger(player, stack, after);
         }
@@ -87,7 +88,7 @@ public enum RetaliationEffect implements EnchantmentEntityEffect {
         }
         if (DebugMode.enabled()) {
             DebugMode.trace(world, level, Registries.ITEM.getId(item).toString(), broke ? "A_BREAK" : "A_DURABILITY",
-                    before, after, DURABILITY_COST, after - before);
+                    before, after, cost, after - before);
         }
     }
 
